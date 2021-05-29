@@ -14,7 +14,9 @@
     {
       "files": ["*.ts", "*.tsx"],
       "rules": {
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
       }
     },
     {
@@ -23,7 +25,6 @@
         "jsx-a11y/anchor-is-valid": "off",
         "react/prop-types": "off",
         "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off"
       }
     }
   ],

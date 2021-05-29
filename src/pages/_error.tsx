@@ -1,15 +1,15 @@
 // https://nextjs.org/docs/advanced-features/custom-error-page
 
-import React from 'react'
-import { NextPage } from 'next'
-import Error from 'next/error'
+import React from 'react';
+import { NextPage } from 'next';
+import Error from 'next/error';
 
 interface Props {
-  statusCode: number
+  statusCode: number;
 }
 
 export const Page: NextPage<Props> = ({ statusCode }) => {
-  return <Error statusCode={statusCode} />
-}
+  return <Error statusCode={statusCode} />;
+};
 
-export default Page
+export default Page;

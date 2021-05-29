@@ -1,19 +1,15 @@
-import React from 'react'
-import { useRouter } from 'next/router'
+import React from 'react';
+import { useRouter } from 'next/router';
 
-import Image from '~/components/Image/Image'
+import Image from '~/components/Image/Image';
 
-import { useRoverImage } from '~/hooks/useRoverImage'
-import { IRoverImage } from '~/interface/Rover'
-
-function getTitle(image: IRoverImage) {
-  return `sol: ${image.metadata.sol}, Date: ${image.metadata.earth_date}`
-}
+import { useRoverImage } from '~/hooks/useRoverImage';
+import { getTitle } from '~/utils/rover';
 
 function RoverImage() {
-  const router = useRouter()
-  const { imageIdx } = router.query
-  const { image, isLoading, isError } = useRoverImage(Number(imageIdx))
+  const router = useRouter();
+  const { imageIdx } = router.query;
+  const { image, isLoading, isError } = useRoverImage(Number(imageIdx));
   return (
     <main>
       {isLoading && <p>Loading ... </p>}
@@ -27,7 +23,7 @@ function RoverImage() {
         />
       )}
     </main>
-  )
+  );
 }
 
-export default RoverImage
+export default RoverImage;

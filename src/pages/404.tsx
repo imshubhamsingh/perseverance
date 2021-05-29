@@ -1,11 +1,11 @@
 // https://nextjs.org/docs/advanced-features/custom-error-page
 
-import React from 'react'
-import { NextPage } from 'next'
-import Error from 'next/error'
+import React from 'react';
+import { NextPage } from 'next';
+import Error from 'next/error';
 
 export const Page: NextPage = () => {
-  return <Error statusCode={404} />
-}
+  return <Error statusCode={404} />;
+};
 
-export default Page
+export default Page;

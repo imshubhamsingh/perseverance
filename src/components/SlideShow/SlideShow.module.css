@@ -1,0 +1,51 @@
+.slideShow {
+  width: 633px;
+  height: 384px;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  flex-wrap: nowrap;
+  transition: transform 700ms ease-in;
+}
+
+.item {
+  position: relative;
+  flex: 0 0 100%;
+  width: 633px;
+  height: 384px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.button {
+  font: bold 30px sans-serif;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 100%;
+  opacity: 0;
+  user-select: none;
+  z-index: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.previous {
+  left: 0;
+  top: 0;
+}
+
+.next {
+  right: 0;
+  top: 0;
+}
+
+.button:hover {
+  opacity: 1;
+  cursor: pointer;
+}

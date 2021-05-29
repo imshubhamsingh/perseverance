@@ -1,5 +1,5 @@
-function Header(){
-  return <>perseverance</>
+function Header() {
+  return <>perseverance</>;
 }
 
-export default Header
+export default Header;

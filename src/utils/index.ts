@@ -1,12 +1,11 @@
-export function debounce(fn: Function, wait: number) {
-    let timeOut: NodeJS.Timeout | undefined;
-    return function debounceFn(...args: any[]) {
-        const later = () => {
-            timeOut = undefined;
-                fn.call(null, ...args);
-        };
-        clearTimeout(timeOut as NodeJS.Timeout);
-
-        timeOut = setTimeout(later, wait);
-    };
+export function throttle(fn: <T>(arg?: T) => T |void, limit: number) {
+  let inThrottle: boolean;
+  return function thFn<U>(...args: U[]) {
+    if (!inThrottle) {
+      //@ts-ignore
+      fn.call(this, ...args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
 }

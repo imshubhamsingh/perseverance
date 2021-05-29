@@ -1,5 +1,5 @@
 const internalErrorMap = {
-  ApiError: 'ApiError'
-}
+  ApiError: 'ApiError',
+};
 
-export default internalErrorMap
+export default internalErrorMap;
