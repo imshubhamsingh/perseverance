@@ -47,50 +47,6 @@
       "eslint"
     ]
   },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "eslint:recommended",
-      "plugin:import/errors",
-      "plugin:import/warnings",
-      "plugin:import/typescript",
-      "plugin:jsx-a11y/recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "plugin:react-hooks/recommended"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "*.ts",
-          "*.tsx"
-        ],
-        "rules": {
-          "import/no-unresolved": "off"
-        }
-      },
-      {
-        "files": [
-          "*.tsx"
-        ],
-        "rules": {
-          "jsx-a11y/anchor-is-valid": "off",
-          "react/prop-types": "off",
-          "@typescript-eslint/no-empty-interface": "off"
-        }
-      }
-    ],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    }
-  },
-  "eslintIgnore": [
-    "node_modules/",
-    "out/",
-    "next.config.js"
-  ],
   "renovate": {
     "extends": [
       "github>ctison/renovate"
