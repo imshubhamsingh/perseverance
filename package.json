@@ -1,0 +1,99 @@
+{
+  "name": "perseverance",
+  "version": "1.0.0",
+  "description": "perseverance image gallery",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "export": "next export",
+    "analyze": "ANALYZE=true yarn run build",
+    "start": "next dev -p 9000",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,yaml,gql,md,html,css}'",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imshubhamsingh/perseverance.git"
+  },
+  "author": "Shubham Singh",
+  "dependencies": {
+    "next": "10.2.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "swr": "0.5.6"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "10.2.3",
+    "@types/node": "15.6.1",
+    "@types/react": "17.0.8",
+    "@typescript-eslint/eslint-plugin": "4.25.0",
+    "@typescript-eslint/parser": "4.25.0",
+    "eslint": "7.27.0",
+    "eslint-plugin-import": "2.23.3",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.23.2",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "husky": "6.0.0",
+    "lint-staged": "11.0.0",
+    "prettier": "2.3.0",
+    "typescript": "4.3.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,yaml,gql,md,html,css}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "eslint:recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript",
+      "plugin:jsx-a11y/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.ts",
+          "*.tsx"
+        ],
+        "rules": {
+          "import/no-unresolved": "off"
+        }
+      },
+      {
+        "files": [
+          "*.tsx"
+        ],
+        "rules": {
+          "jsx-a11y/anchor-is-valid": "off",
+          "react/prop-types": "off",
+          "@typescript-eslint/no-empty-interface": "off"
+        }
+      }
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "out/",
+    "next.config.js"
+  ],
+  "renovate": {
+    "extends": [
+      "github>ctison/renovate"
+    ]
+  }
+}
