@@ -1,4 +1,6 @@
 import * as React from 'react';
+import cn from 'classnames';
+
 import styles from './AppWrapper.module.css';
 
 interface IAppWrapper {
@@ -6,7 +8,7 @@ interface IAppWrapper {
 }
 
 function AppWrapper({ children }: IAppWrapper) {
-  return <main className={styles.main}>{children}</main>;
+  return <main className={cn('flex-auto', styles.main)}>{children}</main>;
 }
 
 export default AppWrapper;

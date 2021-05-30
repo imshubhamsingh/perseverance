@@ -1,12 +1,13 @@
 .img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
 }
 
 .imgContainer {
-  width: 400px;
-  height: 400px;
+  width: 384px;
+  height: 288px;
+  padding: 0 8px;
+  border-radius: 8px;
   background-size: unset;
-  
+  overflow: hidden;
 }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import RoverImage from '~/components/RoverImage/RoverImage';
@@ -16,13 +15,16 @@ function HomePage() {
       {isLoading && <p>Loading ... </p>}
       {isError && <p>Image Not present</p>}
       {data && (
-        <SlideShow speed={speed ? Number(speed) : undefined} autoplay={true}>
+        <SlideShow
+          speed={speed ? Number(speed) : undefined}
+          autoplay={false}
+          style={{
+            width: 384,
+            height: 288,
+          }}
+        >
           {new Array(data.numImages).fill(1).map((_, idx) => (
-            <Link href={`/${idx}`} key={idx}>
-              <a rel='noopener noreferrer' target='_blank'>
-                <RoverImage index={idx} />
-              </a>
-            </Link>
+            <RoverImage key={idx} index={idx} />
           ))}
         </SlideShow>
       )}

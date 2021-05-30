@@ -8,6 +8,7 @@ interface ISlideShow {
   children: React.ReactNode[];
   speed: number;
   autoplay: boolean;
+  style?: React.CSSProperties;
 }
 
 function SlideShow(props: ISlideShow) {
@@ -51,19 +52,26 @@ function SlideShow(props: ISlideShow) {
   }, [nextImage, props.autoplay, props.speed]);
 
   return (
-    <div id='slide-show' className={styles.slideShow}>
+    <div id='slide-show' className={styles.root}>
       <button onClick={previousImage} className={cn(styles.button, styles.previous)}>
-        &lt;&lt;
+        ←
       </button>
-      <ul ref={containerRef} className={styles.container}>
-        {childrenArr.map((child, index) => (
-          <li className={styles.item} key={index} data-index={index}>
-            {child}
-          </li>
-        ))}
-      </ul>
+      <div
+        className={styles.slideShow}
+        style={{
+          ...props.style,
+        }}
+      >
+        <ul ref={containerRef} className={styles.container}>
+          {childrenArr.map((child, index) => (
+            <li className={styles.item} key={index} data-index={index}>
+              {child}
+            </li>
+          ))}
+        </ul>
+      </div>
       <button onClick={nextImage} className={cn(styles.button, styles.next)}>
-        &gt;&gt;
+        →
       </button>
     </div>
   );

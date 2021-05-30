@@ -37,7 +37,7 @@ function RoverImage(props: IRoverImage) {
 
   function render() {
     if (!image) {
-      return <p>Loading Image</p>;
+      return <p>Fetching Image</p>;
     }
 
     return <Img image={image} />;
