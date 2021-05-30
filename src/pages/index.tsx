@@ -9,11 +9,11 @@ import { useTotalRoverImageSize } from '~/hooks/useRoverImage';
 import { useIsMounted } from '~/hooks/useIsMounted';
 
 function HomePage() {
-  const { data, isError } = useTotalRoverImageSize();
+  const { data, isError, isLoading } = useTotalRoverImageSize();
   const router = useRouter();
   const { speed } = router.query;
   const isMounted = useIsMounted();
-  if (!isMounted || !data) {
+  if (!isMounted || isLoading) {
     return <RoverImage.Placeholder />;
   }
   return (
@@ -22,7 +22,7 @@ function HomePage() {
       {data && (
         <SlideShow
           speed={speed ? Number(speed) : undefined}
-          autoplay={true}
+          autoplay={false}
           style={{
             width: 368,
             height: 'auto',

@@ -24,3 +24,9 @@
   background-size: unset;
   overflow: hidden;
 }
+
+.title {
+  font-size: 28px;
+  color: white;
+  font-weight: 800;
+}

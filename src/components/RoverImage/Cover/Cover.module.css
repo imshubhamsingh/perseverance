@@ -1,0 +1,25 @@
+.container {
+  display: inline-block;
+  position: relative;
+}
+
+.container:hover .widget {
+  opacity: 1;
+}
+
+.widget {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  top: 0;
+  user-select: none;
+  left: 0;
+  border-radius: 12px;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  transition: opacity 200ms ease-in;
+}
