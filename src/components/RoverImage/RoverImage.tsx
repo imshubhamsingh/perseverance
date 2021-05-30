@@ -39,7 +39,7 @@ function RoverImage(props: IRoverImage) {
 
   React.useEffect(() => {
     return () => {
-      // controller?.abort?.();
+      controller?.abort?.();
     };
   }, [controller]);
 
