@@ -23,13 +23,15 @@ function SlideShow(props: ISlideShow) {
   const [count, setCount] = React.useState<number>(0);
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
 
+  const _timmer = Math.min(props.speed, 700);
+
   const previousImage = throttle(() => {
     setCount((el: number) => Math.max(0, el - 1));
-  }, Math.min(props.speed, 700));
+  }, _timmer);
 
   const nextImage = throttle(() => {
     setCount((el: number) => Math.min(el + 1, childrenArr.length - 1));
-  }, Math.min(props.speed, 700));
+  }, _timmer);
 
   function setPause(val: boolean) {
     setIsPaused(() => {
@@ -41,9 +43,10 @@ function SlideShow(props: ISlideShow) {
     const el = containerRef.current;
     const child = el?.children[0] as HTMLElement;
     if (child && el) {
+      el.style.transition = `transform ${_timmer}ms ease-in`;
       el.style.transform = `translateX(-${count * child.offsetWidth}px)`;
     }
-  }, [count]);
+  }, [_timmer, count]);
 
   React.useEffect(() => {
     let id: NodeJS.Timeout;
