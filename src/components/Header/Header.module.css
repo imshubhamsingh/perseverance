@@ -8,3 +8,9 @@
     letter-spacing: 10.2px;
   }
 }
+
+@media (max-width: 500px) {
+  .header {
+    font-size: 48px;
+  }
+}

@@ -1,16 +1,7 @@
 @import './font.css';
 @import './reset.css';
 @import './space.css';
-
-.flex-auto {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-column {
-  flex-direction: column;
-}
+@import './grid.css';
 
 .shimmer {
   background: #eeeeee;

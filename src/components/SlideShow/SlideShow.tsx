@@ -24,16 +24,12 @@ function SlideShow(props: ISlideShow) {
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
 
   const previousImage = throttle(() => {
-    if (count - 1 >= 0) {
-      setCount((el: number) => el - 1);
-    }
-  }, 700);
+    setCount((el: number) => Math.max(0, el - 1));
+  }, Math.min(props.speed, 700));
 
   const nextImage = throttle(() => {
-    if (count + 1 < childrenArr.length) {
-      setCount((el: number) => el + 1);
-    }
-  }, 700);
+    setCount((el: number) => Math.min(el + 1, childrenArr.length - 1));
+  }, Math.min(props.speed, 700));
 
   function setPause(val: boolean) {
     setIsPaused(() => {
@@ -51,14 +47,17 @@ function SlideShow(props: ISlideShow) {
 
   React.useEffect(() => {
     let id: NodeJS.Timeout;
-    if (props.autoplay) {
+    if (props.autoplay && typeof props.speed === 'number') {
       id = setInterval(() => {
         if (isPaused) {
           clearInterval(id);
           return;
         }
         nextImage();
-        if (count + 1 >= childrenArr.length) clearInterval(id);
+        if (count + 1 >= childrenArr.length) {
+          console.log('clearedInterval');
+          clearInterval(id);
+        }
       }, props.speed);
     }
     return () => {
@@ -74,9 +73,11 @@ function SlideShow(props: ISlideShow) {
       onMouseEnter={() => setPause(true)}
       onMouseLeave={() => setPause(false)}
     >
-      <button onClick={previousImage} className={cn(styles.button, styles.previous)}>
-        ←
-      </button>
+      {count > 0 && (
+        <button onClick={previousImage} className={cn(styles.button, styles.previous)} disabled={count < 0}>
+          ←
+        </button>
+      )}
       <div
         className={styles.slideShow}
         style={{
@@ -94,9 +95,11 @@ function SlideShow(props: ISlideShow) {
           ))}
         </ul>
       </div>
-      <button onClick={nextImage} className={cn(styles.button, styles.next)}>
-        →
-      </button>
+      {count < childrenArr.length - 1 && (
+        <button onClick={nextImage} className={cn(styles.button, styles.next)}>
+          →
+        </button>
+      )}
     </div>
   );
 }

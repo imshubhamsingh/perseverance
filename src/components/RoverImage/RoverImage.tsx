@@ -39,7 +39,7 @@ function RoverImage(props: IRoverImage) {
 
   React.useEffect(() => {
     return () => {
-      controller?.abort?.();
+      // controller?.abort?.();
     };
   }, [controller]);
 
@@ -52,7 +52,7 @@ function RoverImage(props: IRoverImage) {
   if (!image || isError) {
     return (
       <RoverImage.Placeholder
-        text={!isError ? 'Connection established ...' : 'Connection failed ...'}
+        text={!isError ? 'Fetching image ...' : 'Fetching failed ...'}
       />
     );
   }
