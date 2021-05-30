@@ -3,43 +3,44 @@ import cn from 'classnames';
 
 import styles from './SlideShow.module.css';
 import { throttle } from '~/utils';
+import LazyLoader from '~/containers/LazyLoader/LazyLoader';
 
 interface ISlideShow {
   children: React.ReactNode[];
   speed: number;
   autoplay: boolean;
   style?: React.CSSProperties;
+  lazyLoaderConfig: {
+    placeholder?: React.ReactElement;
+    threshold?: number;
+  };
 }
 
 function SlideShow(props: ISlideShow) {
   const childrenArr = React.Children.toArray(props.children);
 
   const containerRef = React.useRef<HTMLUListElement>(null);
-  const count = React.useRef(0);
+  const [count, setCount] = React.useState<number>(0);
 
-  const previousImage = React.useCallback(
-    throttle(() => {
-      const el = containerRef.current;
-      const child = el?.children[0] as HTMLElement;
-      if (child && el && count.current - 1 >= 0) {
-        count.current = count.current - 1;
-        el.style.transform = `translateX(-${count.current * child.offsetWidth}px)`;
-      }
-    }, 700),
-    []
-  );
+  const previousImage = throttle(() => {
+    if (count - 1 >= 0) {
+      setCount((el: number) => el - 1);
+    }
+  }, 700);
 
-  const nextImage = React.useCallback(
-    throttle(() => {
-      const el = containerRef.current;
-      const child = el?.children[0] as HTMLElement;
-      if (child && el && count.current + 1 < childrenArr.length) {
-        count.current = count.current + 1;
-        el.style.transform = `translateX(-${count.current * child.offsetWidth}px)`;
-      }
-    }, 700),
-    []
-  );
+  const nextImage = throttle(() => {
+    if (count + 1 < childrenArr.length) {
+      setCount((el: number) => el + 1);
+    }
+  }, 700);
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    const child = el?.children[0] as HTMLElement;
+    if (child && el) {
+      el.style.transform = `translateX(-${count * child.offsetWidth}px)`;
+    }
+  }, [count]);
 
   React.useEffect(() => {
     let id: NodeJS.Timeout;
@@ -64,8 +65,11 @@ function SlideShow(props: ISlideShow) {
       >
         <ul ref={containerRef} className={styles.container}>
           {childrenArr.map((child, index) => (
-            <li className={styles.item} key={index} data-index={index}>
-              {child}
+            <li className={styles.item} key={index}>
+              <LazyLoader index={index} current={count} {...props.lazyLoaderConfig}>
+                {/** @ts-ignore*/}
+                {child}
+              </LazyLoader>
             </li>
           ))}
         </ul>
@@ -82,4 +86,8 @@ export default SlideShow;
 SlideShow.defaultProps = {
   speed: 5000,
   autoplay: false,
+  lazyLoadingConfig: {
+    placeholder: <div />,
+    threshold: 0,
+  },
 };

@@ -12,7 +12,6 @@ export interface IRoverImage {
 
 function Img(props: { image: IRoverInfo }) {
   const { image } = props;
-  // console.log(image)
   return (
     <img
       key={image.metadata.id}
@@ -35,22 +34,23 @@ function RoverImage(props: IRoverImage) {
     };
   }, [controller]);
 
-  function render() {
-    if (!image) {
-      return <p>Fetching Image</p>;
-    }
-
-    return <Img image={image} />;
+  if (!image) {
+    return <RoverImage.Placeholder />;
   }
+
   return (
-    <figure
-      className={cn('flex-auto', styles.imgContainer, {
-        shimmer: !image,
-      })}
-    >
-      {render()}
+    <figure className={cn('flex-auto', styles.imgContainer)}>
+      <Img image={image} />;
     </figure>
   );
 }
 
 export default RoverImage;
+
+RoverImage.Placeholder = () => (
+  <figure className={cn('flex-auto', styles.imgContainer)}>
+    <p className={cn('flex-auto', 'shimmer', styles.placeholder)}>
+      <span>Fetching Image</span>
+    </p>
+  </figure>
+);

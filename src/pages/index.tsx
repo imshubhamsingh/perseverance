@@ -17,10 +17,15 @@ function HomePage() {
       {data && (
         <SlideShow
           speed={speed ? Number(speed) : undefined}
-          autoplay={false}
+          autoplay={true}
           style={{
             width: 384,
             height: 288,
+            borderRadius: 8,
+          }}
+          lazyLoaderConfig={{
+            placeholder: <RoverImage.Placeholder />,
+            threshold: 10
           }}
         >
           {new Array(data.numImages).fill(1).map((_, idx) => (
