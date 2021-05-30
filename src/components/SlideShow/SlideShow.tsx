@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import cn from 'classnames';
 
 import styles from './SlideShow.module.css';
@@ -7,6 +7,7 @@ import { throttle } from '~/utils';
 interface ISlideShow {
   children: React.ReactNode[];
   speed: number;
+  autoplay: boolean;
 }
 
 function SlideShow(props: ISlideShow) {
@@ -15,30 +16,39 @@ function SlideShow(props: ISlideShow) {
   const containerRef = React.useRef<HTMLUListElement>(null);
   const count = React.useRef(0);
 
-  const previousImage = throttle(() => {
-    const el = containerRef.current;
-    const child = el?.children[0] as HTMLElement;
-    if (child && el && count.current - 1 >= 0) {
-      count.current = count.current - 1;
-      el.style.transform = `translateX(-${count.current * child.offsetWidth}px)`;
-    }
-  }, 700);
+  const previousImage = React.useCallback(
+    throttle(() => {
+      const el = containerRef.current;
+      const child = el?.children[0] as HTMLElement;
+      if (child && el && count.current - 1 >= 0) {
+        count.current = count.current - 1;
+        el.style.transform = `translateX(-${count.current * child.offsetWidth}px)`;
+      }
+    }, 700),
+    []
+  );
 
-  const nextImage = throttle(() => {
-    const el = containerRef.current;
-    const child = el?.children[0] as HTMLElement;
-    if (child && el && count.current + 1 < childrenArr.length) {
-      count.current = count.current + 1;
-      el.style.transform = `translateX(-${count.current * child.offsetWidth}px)`;
-    }
-  }, 700);
+  const nextImage = React.useCallback(
+    throttle(() => {
+      const el = containerRef.current;
+      const child = el?.children[0] as HTMLElement;
+      if (child && el && count.current + 1 < childrenArr.length) {
+        count.current = count.current + 1;
+        el.style.transform = `translateX(-${count.current * child.offsetWidth}px)`;
+      }
+    }, 700),
+    []
+  );
 
   React.useEffect(() => {
-    const id = setInterval(nextImage, props.speed);
+    let id: NodeJS.Timeout;
+    if (props.autoplay) {
+      id = setInterval(nextImage, props.speed);
+    }
     return () => {
       clearInterval(id);
     };
-  }, []);
+  }, [nextImage, props.autoplay, props.speed]);
 
   return (
     <div id='slide-show' className={styles.slideShow}>
@@ -62,5 +72,6 @@ function SlideShow(props: ISlideShow) {
 export default SlideShow;
 
 SlideShow.defaultProps = {
-  speed: 1000,
+  speed: 5000,
+  autoplay: false,
 };

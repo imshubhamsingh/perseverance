@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.flex-auto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.shimmer {
+  background: #eeeeee;
+  background-image: linear-gradient(to right, #eeeeee 0%, #f9fafb 20%, #eeeeee 40%, #eeeeee 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 200px;
+  animation: placeholderShimmer 1s linear infinite forwards;
+  opacity: 0.8;
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}

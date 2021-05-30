@@ -1,29 +1,28 @@
-import React from 'react';
+import * as React from 'react';
+import {} from 'next/link';
 import { useRouter } from 'next/router';
+import RoverImage from '~/components/RoverImage/RoverImage';
 
-import Image from '~/components/Image/Image';
-
-import { useRoverImage } from '~/hooks/useRoverImage';
-import { getTitle } from '~/utils/rover';
-
-function RoverImage() {
+function RoverIndexedImage() {
   const router = useRouter();
   const { imageIdx } = router.query;
-  const { image, isLoading, isError } = useRoverImage(Number(imageIdx));
-  return (
-    <main>
-      {isLoading && <p>Loading ... </p>}
-      {isError && <p>Image Not present</p>}
-      {image && (
-        <Image
-          src={image.images.base64}
-          alt={String(image.metadata.id)}
-          title={getTitle(image)}
-          ariaLabel={getTitle(image)}
-        />
-      )}
-    </main>
-  );
+  const idx = Number(imageIdx);
+
+  const redirect = React.useRef(() => {});
+  redirect.current = () => router.push('/not-found');
+
+  React.useEffect(() => {
+    if (idx && isNaN(idx)) {
+      redirect.current();
+    }
+  }, [idx]);
+
+  function render() {
+    if (isNaN(idx)) return null;
+    return <RoverImage index={idx} />;
+  }
+
+  return render();
 }
 
-export default RoverImage;
+export default RoverIndexedImage;

@@ -20,17 +20,22 @@ export interface IRover {
   status: string;
 }
 
-export interface IRoverImage {
+export interface IRoverInfo {
   metadata: IMetadata;
   images: {
     base64: string;
   };
 }
 
+export interface IRoverInfoSize {
+  key: string;
+  numImages: number;
+}
+
 abstract class IRoverService {
-  abstract fetchLatest(...args: any): Promise<IRoverImage>;
-  abstract fetchByIndex(...args: any): Promise<IRoverImage>;
-  abstract fetchByRange(...args: any): Promise<IRoverImage[]>;
+  abstract fetchLatest(...args: any): Promise<IRoverInfo>;
+  abstract fetchByIndex(...args: any): Promise<IRoverInfo>;
+  abstract fetchTotalImageSize(): Promise<IRoverInfoSize>;
 }
 
 export default IRoverService;

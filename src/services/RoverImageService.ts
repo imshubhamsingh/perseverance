@@ -1,28 +1,22 @@
 import { get } from './HTTPService';
-import IRoverService, { IRoverImage } from '~/interface/Rover';
+import IRoverService, { IRoverInfo, IRoverInfoSize } from '~/interface/Rover';
 
 const API_END_POINT = 'https://hiring.hypercore-protocol.org/termrover';
 
 class RoverImageService extends IRoverService {
-  async fetchLatest(): Promise<IRoverImage> {
-    const response = await get<IRoverImage>(API_END_POINT + '/latest');
+  async fetchLatest(): Promise<IRoverInfo> {
+    const response = await get<IRoverInfo>(API_END_POINT + '/latest');
     return response;
   }
 
-  async fetchByIndex(idx: number): Promise<IRoverImage> {
-    const response = await get<IRoverImage>(API_END_POINT + '/' + idx);
+  async fetchByIndex(idx: number, config: RequestInit = {}): Promise<IRoverInfo> {
+    const response = await get<IRoverInfo>(API_END_POINT + '/' + idx, config);
     return response;
   }
 
-  async fetchByRange(from: number, to: number): Promise<IRoverImage[]> {
-    let idx = from;
-    const results = [];
-    while (idx <= to) {
-      const result = await this.fetchByIndex(idx);
-      results.push(result);
-      idx++;
-    }
-    return results;
+  async fetchTotalImageSize(){
+    const response = await get<IRoverInfoSize>(API_END_POINT + '/');
+    return response;
   }
 }
 
