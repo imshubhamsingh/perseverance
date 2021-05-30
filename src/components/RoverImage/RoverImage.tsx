@@ -49,8 +49,12 @@ function RoverImage(props: IRoverImage) {
     }
   }, [isError, onError]);
 
-  if (!image) {
-    return <RoverImage.Placeholder text={'Connection established ...'} />;
+  if (!image || isError) {
+    return (
+      <RoverImage.Placeholder
+        text={!isError ? 'Connection established ...' : 'Connection failed ...'}
+      />
+    );
   }
 
   return (

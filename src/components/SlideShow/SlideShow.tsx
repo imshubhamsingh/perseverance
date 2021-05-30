@@ -21,6 +21,7 @@ function SlideShow(props: ISlideShow) {
 
   const containerRef = React.useRef<HTMLUListElement>(null);
   const [count, setCount] = React.useState<number>(0);
+  const [isPaused, setIsPaused] = React.useState<boolean>(false);
 
   const previousImage = throttle(() => {
     if (count - 1 >= 0) {
@@ -34,6 +35,12 @@ function SlideShow(props: ISlideShow) {
     }
   }, 700);
 
+  function setPause(val: boolean) {
+    setIsPaused(() => {
+      return val;
+    });
+  }
+
   React.useEffect(() => {
     const el = containerRef.current;
     const child = el?.children[0] as HTMLElement;
@@ -46,8 +53,11 @@ function SlideShow(props: ISlideShow) {
     let id: NodeJS.Timeout;
     if (props.autoplay) {
       id = setInterval(() => {
+        if (isPaused) {
+          clearInterval(id);
+          return;
+        }
         nextImage();
-        console.log(count + 1, childrenArr.length);
         if (count + 1 >= childrenArr.length) clearInterval(id);
       }, props.speed);
     }
@@ -55,10 +65,15 @@ function SlideShow(props: ISlideShow) {
       clearInterval(id);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.autoplay, props.speed]);
+  }, [props.autoplay, props.speed, isPaused]);
 
   return (
-    <div id='slide-show' className={styles.root}>
+    <div
+      id='slide-show'
+      className={styles.root}
+      onMouseEnter={() => setPause(true)}
+      onMouseLeave={() => setPause(false)}
+    >
       <button onClick={previousImage} className={cn(styles.button, styles.previous)}>
         ←
       </button>
