@@ -7,10 +7,13 @@ import { useRoverImage } from '~/hooks/useRoverImage';
 import { IRoverInfo } from '~/interface/Rover';
 import { getTitle } from '~/utils/rover';
 
+import type CustomError from '~/interface/CustomError';
+
 import styles from './RoverImage.module.css';
 
 export interface IRoverImage {
   index: number;
+  onError?: (error: CustomError) => void;
 }
 
 function Img(props: { image: IRoverInfo }) {
@@ -31,8 +34,8 @@ function Img(props: { image: IRoverInfo }) {
 }
 
 function RoverImage(props: IRoverImage) {
-  const { index } = props;
-  const { image, controller } = useRoverImage(index);
+  const { index, onError } = props;
+  const { image, isError, controller } = useRoverImage(index);
 
   React.useEffect(() => {
     return () => {
@@ -40,12 +43,18 @@ function RoverImage(props: IRoverImage) {
     };
   }, [controller]);
 
+  React.useEffect(() => {
+    if (isError && onError) {
+      onError?.(isError);
+    }
+  }, [isError, onError]);
+
   if (!image) {
-    return <RoverImage.Placeholder text={'Connection established 📟 ...'} />;
+    return <RoverImage.Placeholder text={'Connection established ...'} />;
   }
 
   return (
-    <figure className={cn('flex-auto', styles.imgContainer)}>
+    <figure className={cn('flex-auto', 'pointer', styles.imgContainer)}>
       <Cover
         toRender={
           <div className={styles.title}>
@@ -66,7 +75,7 @@ function RoverImage(props: IRoverImage) {
 
 export default RoverImage;
 
-RoverImage.Placeholder = ({ text }: { text: string } = { text: 'Connecting to 🛰 ...' }) => (
+RoverImage.Placeholder = ({ text }: { text?: string } = { text: 'Connecting to server ...' }) => (
   <figure className={cn('flex-auto', styles.imgContainer)}>
     <p className={cn('flex-auto', 'shimmer', 'font-regular', styles.placeholder)}>
       <span>{text}</span>

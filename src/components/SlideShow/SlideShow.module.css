@@ -50,6 +50,6 @@
   right: -13px;
 }
 
-.button:hover {
+.button:hover, .button:focus {
   opacity: 1;
 }

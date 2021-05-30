@@ -21,6 +21,10 @@
   opacity: 0.8;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 @keyframes placeholderShimmer {
   0% {
     background-position: -468px 0;

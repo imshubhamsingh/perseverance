@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {} from 'next/link';
 import { useRouter } from 'next/router';
 import RoverImage from '~/components/RoverImage/RoverImage';
 import { useIsMounted } from '~/hooks/useIsMounted';
+
+import type CustomError from '~/interface/CustomError';
 
 function RoverIndexedImage() {
   const router = useRouter();
@@ -15,14 +16,20 @@ function RoverIndexedImage() {
   redirect.current = () => router.push('/not-found');
 
   React.useEffect(() => {
-    if (idx && isNaN(idx)) {
+    if (imageIdx && isNaN(idx)) {
       redirect.current();
     }
-  }, [idx]);
+  }, [idx, imageIdx]);
+
+  function onError(err: CustomError) {
+    if (err?.customData?.status === 404) {
+      redirect.current();
+    }
+  }
 
   function render() {
     if (isNaN(idx)) return null;
-    return <RoverImage index={idx} />;
+    return <RoverImage index={idx} onError={onError} />;
   }
 
   if (!isMounted) {

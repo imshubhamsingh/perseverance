@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Head from 'next/head';
 import cn from 'classnames';
 
 import styles from './AppWrapper.module.css';
@@ -10,10 +11,17 @@ interface IAppWrapper {
 
 function AppWrapper({ children }: IAppWrapper) {
   return (
-    <main className={cn('flex-auto', 'flex-column', styles.main)}>
-      <Header />
-      <div>{children}</div>
-    </main>
+    <>
+      <Head>
+        <title>PERSEVERANCE | Gallery</title>
+        <meta name='theme-color' content='#111111' />
+        <link rel='shortcut icon' href='/meta/favicon.png' />
+      </Head>
+      <main className={cn('flex-auto', 'flex-column', styles.main)}>
+        <Header />
+        <div>{children}</div>
+      </main>
+    </>
   );
 }
 
