@@ -1,35 +1,44 @@
 import * as React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import RoverImage from '~/components/RoverImage/RoverImage';
 import SlideShow from '~/components/SlideShow/SlideShow';
 
 import { useTotalRoverImageSize } from '~/hooks/useRoverImage';
+import { useIsMounted } from '~/hooks/useIsMounted';
 
 function HomePage() {
-  const { data, isLoading, isError } = useTotalRoverImageSize();
+  const { data, isError } = useTotalRoverImageSize();
   const router = useRouter();
   const { speed } = router.query;
+  const isMounted = useIsMounted();
+  if (!isMounted || !data) {
+    return <RoverImage.Placeholder />;
+  }
   return (
     <>
-      {isLoading && <p>Loading ... </p>}
-      {isError && <p>Image Not present</p>}
+      {isError && <p className='text-white text-1x'>Error in fetching images</p>}
       {data && (
         <SlideShow
           speed={speed ? Number(speed) : undefined}
           autoplay={true}
           style={{
-            width: 384,
-            height: 288,
+            width: 368,
+            height: 'auto',
             borderRadius: 8,
           }}
           lazyLoaderConfig={{
             placeholder: <RoverImage.Placeholder />,
-            threshold: 10
+            threshold: 10,
           }}
         >
           {new Array(data.numImages).fill(1).map((_, idx) => (
-            <RoverImage key={idx} index={idx} />
+            <Link href={`/${idx}`} key={idx}>
+              <a target='_blank' rel='noopener noreferrer' className='link'>
+                <RoverImage index={idx} />
+              </a>
+            </Link>
           ))}
         </SlideShow>
       )}

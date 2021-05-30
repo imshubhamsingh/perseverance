@@ -1,0 +1,10 @@
+.header {
+  margin-bottom: 60px;
+  color: #bebfc0;
+}
+
+@media (min-width: 1184px) {
+  .header {
+    letter-spacing: 10.2px;
+  }
+}

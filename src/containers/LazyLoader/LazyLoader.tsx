@@ -10,6 +10,7 @@ interface ILazyLoader {
 
 function LazyLoader(props: ILazyLoader) {
   const { current, threshold, index, placeholder } = props;
+  // For now using this logic, later on can use other huristic logic too.
   const showChild = current + threshold > index;
   const isMounted = React.useRef(false);
   if (!showChild && !isMounted.current) {

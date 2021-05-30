@@ -45,12 +45,17 @@ function SlideShow(props: ISlideShow) {
   React.useEffect(() => {
     let id: NodeJS.Timeout;
     if (props.autoplay) {
-      id = setInterval(nextImage, props.speed);
+      id = setInterval(() => {
+        nextImage();
+        console.log(count + 1, childrenArr.length);
+        if (count + 1 >= childrenArr.length) clearInterval(id);
+      }, props.speed);
     }
     return () => {
       clearInterval(id);
     };
-  }, [nextImage, props.autoplay, props.speed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.autoplay, props.speed]);
 
   return (
     <div id='slide-show' className={styles.root}>

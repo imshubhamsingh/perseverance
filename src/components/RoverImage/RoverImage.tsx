@@ -40,7 +40,7 @@ function RoverImage(props: IRoverImage) {
 
   return (
     <figure className={cn('flex-auto', styles.imgContainer)}>
-      <Img image={image} />;
+      <Img image={image} />
     </figure>
   );
 }
@@ -49,7 +49,7 @@ export default RoverImage;
 
 RoverImage.Placeholder = () => (
   <figure className={cn('flex-auto', styles.imgContainer)}>
-    <p className={cn('flex-auto', 'shimmer', styles.placeholder)}>
+    <p className={cn('flex-auto', 'shimmer', 'font-regular', styles.placeholder)}>
       <span>Fetching Image</span>
     </p>
   </figure>

@@ -1,6 +1,6 @@
 .img {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 8px;
 }
 
@@ -12,10 +12,14 @@
   background-size: unset;
 }
 
+.placeholder span {
+  text-decoration: none;
+}
+
 .imgContainer {
-  width: 384px;
-  height: 288px;
-  padding: 8px;
+  width: 368px;
+  height: 276px;
+  padding: 0 8px;
   border-radius: 8px;
   background-size: unset;
   overflow: hidden;

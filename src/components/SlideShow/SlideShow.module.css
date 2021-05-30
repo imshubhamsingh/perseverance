@@ -4,7 +4,7 @@
 
 .slideShow {
   width: 633px;
-  height: 384px;
+  height: 100%;
   overflow: hidden;
   position: relative;
 }
@@ -20,6 +20,7 @@
   position: relative;
   flex: 0 0 100%;
   overflow: hidden;
+  list-style: none;
 }
 
 .button {
