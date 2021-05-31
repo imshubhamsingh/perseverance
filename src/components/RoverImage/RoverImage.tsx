@@ -23,6 +23,7 @@ function Img(props: { image: IRoverInfo }) {
     .join(',');
   return (
     <img
+      data-testid='rover-image'
       key={image.metadata.id}
       src={image.images.base64}
       alt={String(image.metadata.id)}
@@ -51,9 +52,7 @@ function RoverImage(props: IRoverImage) {
 
   if (!image || isError) {
     return (
-      <RoverImage.Placeholder
-        text={!isError ? 'Fetching image ...' : 'Fetching failed ...'}
-      />
+      <RoverImage.Placeholder text={!isError ? 'Fetching image ...' : 'Fetching failed ...'} />
     );
   }
 

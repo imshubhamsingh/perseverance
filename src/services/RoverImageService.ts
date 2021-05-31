@@ -1,7 +1,7 @@
 import { get } from './HTTPService';
 import IRoverService, { IRoverInfo, IRoverInfoSize } from '~/interface/Rover';
 
-const API_END_POINT = 'https://hiring.hypercore-protocol.org/termrover';
+export const API_END_POINT = 'https://hiring.hypercore-protocol.org/termrover';
 
 class RoverImageService extends IRoverService {
   async fetchLatest(): Promise<IRoverInfo> {
@@ -10,7 +10,9 @@ class RoverImageService extends IRoverService {
   }
 
   async fetchByIndex(idx: number, config: RequestInit = {}): Promise<IRoverInfo> {
+    debugger;
     const response = await get<IRoverInfo>(API_END_POINT + '/' + idx, config);
+    debugger;
     return response;
   }
 

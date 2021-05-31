@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import IRoverService from '~/interface/Rover';
 import RoverImageService from '~/services/RoverImageService';
 
-const roverImageService: IRoverService = new RoverImageService();
+export const roverImageService: IRoverService = new RoverImageService();
 
 export function useRoverImage(idx: number) {
   let controller;
@@ -16,6 +16,7 @@ export function useRoverImage(idx: number) {
       initialData: null,
     }
   );
+  debugger;
   return { image: data, isLoading: !error && !data, isError: error, controller };
 }
 
