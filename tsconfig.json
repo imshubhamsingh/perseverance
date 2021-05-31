@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "baseUrl": "src",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./*"],
+      "test-utils": ["./../test/test-utils.js"],
     },
     "strictNullChecks": true,
     "alwaysStrict": true,

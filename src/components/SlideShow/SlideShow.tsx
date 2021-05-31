@@ -6,12 +6,19 @@ import { throttle } from '~/utils';
 import LazyLoader from '~/containers/LazyLoader/LazyLoader';
 
 interface ISlideShow {
+  /** Elements to be displayed as slideshow */
   children: React.ReactNode[];
+  /** Speed of slideshow transition from one element to another */
   speed: number;
+  /** Sets slideshow to change slides element automatically in one direction */
   autoplay: boolean;
+  /** Slideshow container custom styles */
   style?: React.CSSProperties;
+  /** lazy loading of element configuration */
   lazyLoaderConfig: {
+    /** placeholder element till the time actual slide is rendered */
     placeholder?: React.ReactElement;
+    /** render slide if current slide + threshold is greater than slide index */
     threshold?: number;
   };
 }
