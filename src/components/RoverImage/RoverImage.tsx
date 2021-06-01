@@ -36,20 +36,22 @@ function Img(props: { image: IRoverInfo }) {
 
 function RoverImage(props: IRoverImage) {
   const { index, onError } = props;
-  const { image, isError, controller } = useRoverImage(index);
-
+  const controller = React.useRef<AbortController>(new AbortController());
+  
+  //@ts-ignore https://github.com/node-fetch/node-fetch/issues/741
+  const { image, isError } = useRoverImage(index, { signal: controller.current.signal });
   React.useEffect(() => {
     return () => {
-      controller?.abort?.();
+      controller.current?.abort?.();
     };
-  }, [controller]);
+  }, []);
 
   React.useEffect(() => {
     if (isError && onError) {
       onError?.(isError);
     }
   }, [isError, onError]);
-
+  
   if (!image || isError) {
     return (
       <RoverImage.Placeholder text={!isError ? 'Fetching image ...' : 'Fetching failed ...'} />

@@ -13,7 +13,7 @@ async function http<T>(path: string, config: RequestInit): Promise<T> {
     });
     return Promise.reject(customError);
   }
-  return response.json().catch(() => ({}));
+  return response.json();
 }
 
 export async function get<T>(path: string, config?: RequestInit): Promise<T> {

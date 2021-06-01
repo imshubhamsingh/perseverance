@@ -4,25 +4,14 @@ import RoverImageService from '~/services/RoverImageService';
 
 export const roverImageService: IRoverService = new RoverImageService();
 
-export function useRoverImage(idx: number) {
-  let controller;
-  if(process.browser){
-    controller = new AbortController()
-  }
-  const { data, error } = useSWR(
-    `roverImage:${idx}`,
-    roverImageService.fetchByIndex.bind(null, idx, {signal: controller?.signal}),
-    {
-      initialData: null,
-    }
+export function useRoverImage(idx: number, reqConfig: RequestInit = {}) {
+  const { data, error } = useSWR(`roverInfo:${idx}`, () =>
+    roverImageService.fetchByIndex(idx, reqConfig)
   );
-  debugger;
-  return { image: data, isLoading: !error && !data, isError: error, controller };
+  return { image: data, isLoading: !error && !data, isError: error };
 }
 
 export function useTotalRoverImageSize() {
-  const { data, error } = useSWR(`roverImageSize`, roverImageService.fetchTotalImageSize, {
-    initialData: null,
-  });
+  const { data, error } = useSWR(`roverImageSize`, roverImageService.fetchTotalImageSize);
   return { data, isLoading: !error && !data, isError: error };
 }

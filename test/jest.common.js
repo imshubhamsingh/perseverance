@@ -10,7 +10,7 @@ module.exports = {
   collectCoverage: true,
   // The directory where Jest should output its coverage files
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: ['/node_modules/', '/.next/', '/pages/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/.next/', '/src/pages', '/src/styles', '/__tests__/'],
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '\\.(css)$': 'identity-obj-proxy',

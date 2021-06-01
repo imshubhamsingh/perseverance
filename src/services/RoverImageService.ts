@@ -10,14 +10,12 @@ class RoverImageService extends IRoverService {
   }
 
   async fetchByIndex(idx: number, config: RequestInit = {}): Promise<IRoverInfo> {
-    debugger;
     const response = await get<IRoverInfo>(API_END_POINT + '/' + idx, config);
-    debugger;
     return response;
   }
 
   async fetchTotalImageSize(){
-    const response = await get<IRoverInfoSize>(API_END_POINT + '/');
+    const response = await get<IRoverInfoSize>(API_END_POINT + '/', {});
     return response;
   }
 }
