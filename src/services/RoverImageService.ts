@@ -18,6 +18,16 @@ class RoverImageService extends IRoverService {
     const response = await get<IRoverInfoSize>(API_END_POINT + '/', {});
     return response;
   }
+  async *stream (from: number = 0, to?: number) {
+    if(!to) {
+      to = from;
+      from = 0;
+    }
+    for (let i = from; i <= to; i++) {
+      const result = await this.fetchByIndex(i);
+      yield result;
+    }
+  };
 }
 
 export default RoverImageService;

@@ -36,6 +36,7 @@ abstract class IRoverService {
   abstract fetchLatest(...args: any): Promise<IRoverInfo>;
   abstract fetchByIndex(...args: any): Promise<IRoverInfo>;
   abstract fetchTotalImageSize(): Promise<IRoverInfoSize>;
+  abstract stream(...args: any): AsyncGenerator<IRoverInfo>
 }
 
 export default IRoverService;

@@ -9,7 +9,7 @@ testComponent('Slide Show', () => {
         {Array(3)
           .fill(0)
           .map((_, idx) => (
-            <p>Test {idx}</p>
+            <p key={idx}>Test {idx}</p>
           ))}
       </SlideShow>
     );
@@ -34,8 +34,8 @@ testComponent('Slide Show', () => {
   });
 
   it('Speed Control', async () => {
-    const SPEED = 100;
-    const {} = render(
+    const SPEED = 600;
+    render(
       <SlideShow autoplay={true} speed={SPEED}>
         {Array(3)
           .fill(0)
@@ -45,8 +45,7 @@ testComponent('Slide Show', () => {
       </SlideShow>
     );
     await act(() => new Promise((r) => setTimeout(r, 2000)));
-    // Render slide on screen
     const container = await screen.getByTestId('slide-show-container');
-    expect(container.style).toHaveProperty('transition-duration', `${SPEED}ms`);
+    expect(container.style).toHaveProperty('transition', `transform ${SPEED}ms ease-in`);
   });
 });

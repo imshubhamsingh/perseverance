@@ -24,4 +24,12 @@ testService('Rover Image Service', () => {
       }
     `);
   });
+  it('Fetching Images stream by Rover', async () => {
+    const TO = 20;
+    const iterator = roverService.stream(TO);
+    for await (const { metadata } of iterator) {
+      const { name } = metadata.rover;
+      expect(name).toEqual('Perseverance');
+    }
+  });
 });
