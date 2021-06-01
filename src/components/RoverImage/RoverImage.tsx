@@ -12,7 +12,9 @@ import type CustomError from '~/interface/CustomError';
 import styles from './RoverImage.module.css';
 
 export interface IRoverImage {
+  /** Rover Image Index value */
   index: number;
+  /** Callback function on fetching of image fails */
   onError?: (error: CustomError) => void;
 }
 

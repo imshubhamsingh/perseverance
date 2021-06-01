@@ -15,7 +15,7 @@ interface ISlideShow {
   /** Slideshow container custom styles */
   style?: React.CSSProperties;
   /** lazy loading of element configuration */
-  lazyLoaderConfig: {
+  lazyLoaderConfig?: {
     /** placeholder element till the time actual slide is rendered */
     placeholder?: React.ReactElement;
     /** render slide if current slide + threshold is greater than slide index */
@@ -84,7 +84,11 @@ function SlideShow(props: ISlideShow) {
       onMouseLeave={() => setPause(false)}
     >
       {count > 0 && (
-        <button onClick={previousImage} className={cn(styles.button, styles.previous)} disabled={count < 0}>
+        <button
+          onClick={previousImage}
+          className={cn(styles.button, styles.previous)}
+          disabled={count < 0}
+        >
           ←
         </button>
       )}
@@ -94,7 +98,7 @@ function SlideShow(props: ISlideShow) {
           ...props.style,
         }}
       >
-        <ul ref={containerRef} className={styles.container}>
+        <ul ref={containerRef} className={styles.container} data-testid='slide-show-container'>
           {childrenArr.map((child, index) => (
             <li className={styles.item} key={index}>
               <LazyLoader index={index} current={count} {...props.lazyLoaderConfig}>

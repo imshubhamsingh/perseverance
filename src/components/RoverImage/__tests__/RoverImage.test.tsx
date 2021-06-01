@@ -5,11 +5,6 @@ import RoverImage from '../RoverImage';
 
 testComponent('Rover Image', () => {
   it('Rendering Rover Image after fetching rover info', async () => {
-    // server.use(
-    //   rest.get(API_END_POINT + '/:index', async (_, res, ctx) => {
-    //     return res(ctx.json({ payload: 'test' }));
-    //   })
-    // );
     render(
       <SWRWrapper>
         <RoverImage index={342} />
