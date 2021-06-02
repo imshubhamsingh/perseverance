@@ -10,6 +10,14 @@
   height: 100%;
   border-radius: 8px;
   background-size: unset;
+  background-color: rgb(34, 36, 38);
+  background-image: linear-gradient(
+    to right,
+    rgb(34, 36, 38) 0%,
+    rgb(27, 29, 30) 20%,
+    rgb(34, 36, 38) 40%,
+    rgb(34, 36, 38) 100%
+  );
 }
 
 .placeholder span {

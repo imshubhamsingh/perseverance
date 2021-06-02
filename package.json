@@ -7,15 +7,12 @@
   "scripts": {
     "build": "next build",
     "export": "next export",
-    "analyze": "ANALYZE=true yarn run build",
+    "analyze": "ANALYZE=true npm run build",
     "start": "next dev -p 9000",
-    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,yaml,gql,md,html,css}'",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,md,html,css}'",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:verbose": "jest --verbose",
-    "test:coverage": "npm test -- --coverage && open ./coverage/lcov-report/index.html",
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --watch"
   },
   "repository": {

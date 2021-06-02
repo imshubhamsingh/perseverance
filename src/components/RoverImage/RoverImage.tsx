@@ -84,7 +84,7 @@ export default RoverImage;
 
 RoverImage.Placeholder = ({ text }: { text?: string } = { text: 'Connecting to server ...' }) => (
   <figure className={cn('flex-auto', styles.imgContainer)}>
-    <p className={cn('flex-auto', 'shimmer', 'font-regular', styles.placeholder)}>
+    <p className={cn('flex-auto', 'shimmer', 'font-regular', 'text-white', styles.placeholder)}>
       <span>{text}</span>
     </p>
   </figure>
