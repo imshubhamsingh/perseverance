@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/imshubhamsingh/perseverance/compare/v2.0.0...v2.1.0) (2021-06-02)
+
+
+### Features
+
+* 🎸 added e2e tests ([83be762](https://github.com/imshubhamsingh/perseverance/commit/83be762d5d576b37409f96c1aa4c310fc5a3eaf0))
+
 ## 2.0.0 (2021-06-01)
 
 
