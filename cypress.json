@@ -1,0 +1,5 @@
+{
+    "baseUrl": "https://perseverance-gallery.vercel.app",
+    "viewportWidth": 1440,
+    "integrationFolder": "cypress/e2e"
+}

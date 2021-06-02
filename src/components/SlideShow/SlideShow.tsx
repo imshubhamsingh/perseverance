@@ -100,7 +100,7 @@ function SlideShow(props: ISlideShow) {
       >
         <ul ref={containerRef} className={styles.container} data-testid='slide-show-container'>
           {childrenArr.map((child, index) => (
-            <li className={styles.item} key={index}>
+            <li className={styles.item} key={index} data-slide-index={index}>
               <LazyLoader index={index} current={count} {...props.lazyLoaderConfig}>
                 {/** @ts-ignore*/}
                 {child}

@@ -13,6 +13,7 @@ The Perseverance rover landed earlier this year, and since then has been uploadi
 | `release`             | Release a new version with updated changelog                                        |
 | `test`                | Run tests on specified with a pattern or filename                                   |
 | `test:debug`          | Run tests on debug mode                                                             |
+| `cypress:run`         | Run E2E tests                                                                       |
  
  ```shell
 # Start dev server
